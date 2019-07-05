@@ -41,6 +41,12 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            //TODO: Add validations for username + errorMessage 
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -56,6 +62,16 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "FirstName")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -65,10 +81,18 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/"); //TODO check  /Home/Index???
+
             if (ModelState.IsValid)
             {
-                var user = new DreamBuilderUser { UserName = Input.Email, Email = Input.Email };
+                var user = new DreamBuilderUser
+                {
+                    UserName = Input.Username,
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
