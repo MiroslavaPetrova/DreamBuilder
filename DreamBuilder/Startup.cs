@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace DreamBuilder
 {
@@ -34,11 +35,23 @@ namespace DreamBuilder
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<DreamBuilderUser, IdentityRole>()
+					//TODO: AddDefaultUI.Bootsrap4 & Stores maybe?
+					//TODO: AddDefaultIdentity || MyIdentity?
+                    // TODO: services.AddScoped<SignInManager<DreamBuilderUser>>();
+            services.AddIdentity<DreamBuilderUser, IdentityRole>(
+                options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            })
                 .AddEntityFrameworkStores<DreamBuilderDbContext>()
                 .AddDefaultTokenProviders();
 
-            //services.AddScoped<SignInManager<DreamBuilderUser>>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -51,6 +64,22 @@ namespace DreamBuilder
                 using (var context = serviceScope.ServiceProvider.GetService<DreamBuilderDbContext>())
                 {
                     context.Database.EnsureCreated();
+
+                    if (!context.Roles.Any())
+                    {
+                        context.Roles.Add(new IdentityRole
+                        {
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
+
+                        context.Roles.Add(new IdentityRole
+                        {
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
+                    }
+                    context.SaveChanges();
                 }
             }
 

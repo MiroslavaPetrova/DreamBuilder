@@ -15,9 +15,9 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
-        <link rel="stylesheet" href="~/css/reset-css.css" />
-        <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/reset-css.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
     <div class="container-fluid">
@@ -34,29 +34,69 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="/Home/Index">Home</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Home/About">About</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Home/Contacts">Contacts</a>
+                        </li>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item active">
+                                <div class="dropdown show">
+                                    <a class="nav-link active dropdown-toggle" href="#"
+                                       id="dropdownMenuLink"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        Products
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="/Products/All">All Products</a>
+                                        <a class="dropdown-item" href="/Products/All">All Products</a>
+                                        <a class="dropdown-item" href="/Products/All">All Products</a>
+                                        @if (this.User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item" href="/Products/Create">Create Product</a>
+                                        }
+                                    </div>
+                                </div>
+                            </li>                           
+                        }
                     </ul>
                     <ul class="navbar-nav fontsizedb">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/Identity/Account/Login">Login</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/Identity/Account/Register">Register</a>
-                        </li>
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Identity/Account/Login">Login</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Identity/Account/Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Identity/Account/Logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>
         </header>
     </div>
+
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
     <div class="container-fluid bg-dreambuilder w-75">
         <footer class="border-top footer font-weight-bold mx-auto">
-            <h4 class="d-flex justify-content-center">&copy; 2019 - DreamBuilder Ltd. </h4>
+            <p class="d-flex justify-content-center">&copy; CopyRight DreamBuilder Ltd.  2015 - @DateTime.UtcNow.Year</p>
         </footer>
     </div>
 
