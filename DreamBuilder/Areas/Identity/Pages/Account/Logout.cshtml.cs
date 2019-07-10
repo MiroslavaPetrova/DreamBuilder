@@ -23,15 +23,28 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public async Task<IActionResult> OnGet(string returnUrl = null)
+
+        public async Task<IActionResult> OnGet()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
 
-            return LocalRedirect("/Home/Index");
+            return Redirect("/");
+        }
 
-            // TODO return this.Page(); to show successfully logged out message
-            //return this.Page();
+        public async Task<IActionResult> OnPost(string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+
+            if (returnUrl != null)
+            {
+                return LocalRedirect(returnUrl);  // TODO: the same as LocalRedirect("/Home/Index");
+            }
+            else
+            {
+                return Page();  // shows successfully logged out message of the LogoutModel
+            }
         }
     }
 }
