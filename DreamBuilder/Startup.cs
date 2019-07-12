@@ -1,5 +1,7 @@
 ﻿using DreamBuilder.Data;
 using DreamBuilder.Models;
+using DreamBuilder.Services;
+using DreamBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,23 +37,23 @@ namespace DreamBuilder
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("DefaultConnection")));
 
-					//TODO: AddDefaultUI.Bootsrap4 & Stores maybe?
-					//TODO: AddDefaultIdentity || MyIdentity?
-                    // TODO: services.AddScoped<SignInManager<DreamBuilderUser>>();
+            //TODO: AddDefaultUI.Bootsrap4 & Stores maybe?
+            //TODO: AddDefaultIdentity || MyIdentity?
+            // TODO: services.AddScoped<SignInManager<DreamBuilderUser>>();
             services.AddIdentity<DreamBuilderUser, IdentityRole>(
                 options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 3;
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-            })
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 3;
+                    options.Password.RequiredUniqueChars = 0;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<DreamBuilderDbContext>()
                 .AddDefaultTokenProviders();
 
-
+            services.AddScoped<IProductsService, ProductsService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -79,6 +81,14 @@ namespace DreamBuilder
                             NormalizedName = "USER"
                         });
                     }
+                    //TODO remove this test code!!!! Make it with Seeder
+                    if (!context.Categories.Any())
+                    {
+                        context.Categories.Add(new Category { Name = "New" });
+                        context.Categories.Add(new Category { Name = "Old" });
+                        
+                    }
+
                     context.SaveChanges();
                 }
             }

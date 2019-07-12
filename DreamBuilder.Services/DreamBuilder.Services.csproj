@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DreamBuilder.Data\DreamBuilder.Data.csproj" />
+    <ProjectReference Include="..\DreamBuilder.Models\DreamBuilder.Models.csproj" />
+  </ItemGroup>
+
+</Project>

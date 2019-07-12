@@ -15,6 +15,8 @@ namespace DreamBuilder.Controllers
             return View();
         }
 
+
+        // TODO implement Privacy route
         public IActionResult Privacy()
         {
             return View();

@@ -17,6 +17,28 @@
   <ItemGroup>
     <ProjectReference Include="..\DreamBuilder.Data\DreamBuilder.Data.csproj" />
     <ProjectReference Include="..\DreamBuilder.Models\DreamBuilder.Models.csproj" />
+    <ProjectReference Include="..\DreamBuilder.Services\DreamBuilder.Services.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Models\Products\ViewModels\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\bootstrap.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\reset-css.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
