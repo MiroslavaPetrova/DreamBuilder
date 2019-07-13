@@ -2,6 +2,14 @@
     background-color:  yellow;
 }
 
+/*.bg-dreambuilderKhaki {
+    background-image: url(https://softuni.bg/trainings/2419/asp-net-core-mvc-june-2019);
+}*/
+.style {
+    background-image: url("paper.gif");
+    background-color: #cccccc;
+}
+
 .text-dreambuilder {
     color: black;
 }

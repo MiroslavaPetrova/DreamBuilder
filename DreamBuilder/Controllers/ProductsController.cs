@@ -13,10 +13,12 @@ namespace DreamBuilder.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductsService productsService;
+        private readonly ICategoriesService categoriesService;
 
-        public ProductsController(IProductsService productsService)
+        public ProductsController(IProductsService productsService, ICategoriesService categoriesService)
         {
             this.productsService = productsService;
+            this.categoriesService = categoriesService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -43,7 +45,7 @@ namespace DreamBuilder.Controllers
                 Image = inputModel.Image,
                 Price = inputModel.Price,
                 ManufacturedOn = inputModel.ManufacturedOn,
-                Category = this.productsService.GetProductCategoryByName(inputModel.Category)
+                Category = this.categoriesService.GetProductCategoryByName(inputModel.Category)
             };
 
             this.productsService.Create(product);

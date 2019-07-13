@@ -1,10 +1,6 @@
 ﻿using DreamBuilder.Data;
 using DreamBuilder.Models;
 using DreamBuilder.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DreamBuilder.Services
 {
@@ -17,16 +13,10 @@ namespace DreamBuilder.Services
             this.context = context;
         }
 
-        public void Create(Product product)   //TODO: change this method
+        public void Create(Product product)   //TODO: think about changing this method
         {
             this.context.Products.Add(product);
             this.context.SaveChanges();
-        }
-
-        public Category GetProductCategoryByName(string categoryName)
-        {
-            var productCategoryFromDb = this.context.Categories.FirstOrDefault(c => c.Name == categoryName);
-            return productCategoryFromDb;
         }
     }
 }

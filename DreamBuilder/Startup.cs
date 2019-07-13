@@ -49,11 +49,14 @@ namespace DreamBuilder
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
+
+                    options.User.RequireUniqueEmail = true;
                 })
                 .AddEntityFrameworkStores<DreamBuilderDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -92,7 +95,7 @@ namespace DreamBuilder
                     context.SaveChanges();
                 }
             }
-
+            //TODO: We do not controll development env at this stage => remove it
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -10,8 +10,6 @@ namespace DreamBuilder.Services.Contracts
     {
         void Create(Product product);
 
-        Category GetProductCategoryByName(string name); // Move it to categoryServices OBLOGATORY!!!
-
         //IQueryable<Product> All();
     }
 }
