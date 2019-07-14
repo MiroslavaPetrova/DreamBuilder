@@ -1,8 +1,6 @@
 ﻿using DreamBuilder.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DreamBuilder.Services.Contracts
 {
@@ -10,6 +8,6 @@ namespace DreamBuilder.Services.Contracts
     {
         void Create(Product product);
 
-        //IQueryable<Product> All();
+        IQueryable<Product> GetAllProducts();
     }
 }

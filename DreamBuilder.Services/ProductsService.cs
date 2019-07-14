@@ -1,6 +1,9 @@
-﻿using DreamBuilder.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DreamBuilder.Data;
 using DreamBuilder.Models;
 using DreamBuilder.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace DreamBuilder.Services
 {
@@ -17,6 +20,13 @@ namespace DreamBuilder.Services
         {
             this.context.Products.Add(product);
             this.context.SaveChanges();
+        }
+      
+        public IQueryable<Product> GetAllProducts()
+        {
+            IQueryable<Product> AllProducts = context.Products.Include(product => product.Category);
+             
+            return AllProducts;
         }
     }
 }

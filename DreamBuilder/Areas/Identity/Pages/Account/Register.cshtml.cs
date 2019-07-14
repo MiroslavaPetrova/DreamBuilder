@@ -75,14 +75,14 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
             public string LastName { get; set; }
         }
 
-        public void OnGet(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/"); //TODO check  /Home/Index???
+            returnUrl = "/Identity/Account/Login";
 
             if (ModelState.IsValid)
             {
@@ -108,15 +108,15 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    return LocalRedirect(returnUrl);
+                    return Redirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
     }

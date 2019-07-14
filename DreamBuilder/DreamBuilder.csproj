@@ -22,11 +22,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Models\Products\ViewModels\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <Content Update="wwwroot\css\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

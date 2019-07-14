@@ -2,12 +2,8 @@
     background-color:  yellow;
 }
 
-/*.bg-dreambuilderKhaki {
-    background-image: url(https://softuni.bg/trainings/2419/asp-net-core-mvc-june-2019);
-}*/
-.style {
-    background-image: url("paper.gif");
-    background-color: #cccccc;
+.bg-dreambuilderKhaki {
+    background-color: khaki;
 }
 
 .text-dreambuilder {
@@ -20,6 +16,15 @@
 
 .fontsizedb {
     font-size: 20px;
+}
+
+.grid {
+    max-width: 1000px;
+    display: grid;
+    grid-template-rows: 100px 200px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 120px;
+    grid-row-gap: 170px;
 }
 
 
