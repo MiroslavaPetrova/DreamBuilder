@@ -14,14 +14,12 @@ namespace DreamBuilder.Controllers
     {
         private readonly IProductsService productsService;
         private readonly ICategoriesService categoriesService;
-        private readonly DreamBuilderDbContext context;
 
         public ProductsController(IProductsService productsService,
-            ICategoriesService categoriesService, DreamBuilderDbContext context)
+            ICategoriesService categoriesService)
         {
             this.productsService = productsService;
             this.categoriesService = categoriesService;
-            this.context = context;
         }
 
         [Authorize(Roles = "Admin")]
@@ -30,8 +28,9 @@ namespace DreamBuilder.Controllers
             return this.View();
         }
 
-        [HttpPost]
+        [AutoValidateAntiforgeryToken]
         [Authorize(Roles = "Admin")]
+        [HttpPost]
         public IActionResult Create(ProductCreateInputModel inputModel)
         {
             if (!ModelState.IsValid)
@@ -45,7 +44,7 @@ namespace DreamBuilder.Controllers
                 Make = inputModel.Make,
                 Model = inputModel.Model,
                 Description = inputModel.Description,
-                Image = inputModel.Image,
+                Image = inputModel.Image.FileName, 
                 Price = inputModel.Price,
                 ManufacturedOn = inputModel.ManufacturedOn,
                 Category = this.categoriesService.GetProductCategoryByName(inputModel.Category)
@@ -58,22 +57,8 @@ namespace DreamBuilder.Controllers
 
         public IActionResult All()
         {
-            List<ProductAllViewModel> AllProducts = productsService.GetAllProducts()
-               .Select(products => new ProductAllViewModel
-               {
-                   Name = products.Name,
-                   Make = products.Make,
-                   Model = products.Model,
-                   Description = products.Description,
-                   Image = products.Image,
-                   Price = products.Price,
-                   ManufacturedOn = products.ManufacturedOn,
-                   Category = products.Category.Name
-               })
-               .ToList();
-
-            return this.View(AllProducts);
-            //return new JsonResult("I am fine");
+            var allProducts = this.productsService.GetAllProducts<ProductAllViewModel>();
+            return this.View(allProducts);
         }
     }
 }

@@ -19,19 +19,16 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<DreamBuilderUser> _signInManager;
         private readonly UserManager<DreamBuilderUser> _userManager;
-        //private readonly ILogger<RegisterModel> _logger;
         //private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<DreamBuilderUser> userManager,
             SignInManager<DreamBuilderUser> signInManager
-            //ILogger<RegisterModel> logger,
             //IEmailSender emailSender
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            //_logger = logger;
             //_emailSender = emailSender;
         }
 
@@ -53,7 +50,7 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]                          //TODO: change the min length of the password
+            [Required]                          //TODO: change the min length of the password after test period
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]

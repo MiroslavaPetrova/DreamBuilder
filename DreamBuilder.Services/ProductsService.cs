@@ -3,6 +3,7 @@ using System.Linq;
 using DreamBuilder.Data;
 using DreamBuilder.Models;
 using DreamBuilder.Services.Contracts;
+using DreamBuilder.Services.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamBuilder.Services
@@ -22,11 +23,12 @@ namespace DreamBuilder.Services
             this.context.SaveChanges();
         }
       
-        public IQueryable<Product> GetAllProducts()
+
+        public IEnumerable<TViewModel> GetAllProducts<TViewModel>()
         {
-            IQueryable<Product> AllProducts = context.Products.Include(product => product.Category);
-             
-            return AllProducts;
+            var allProducts = this.context.Products.To<TViewModel>().ToList();
+
+            return allProducts;
         }
     }
 }

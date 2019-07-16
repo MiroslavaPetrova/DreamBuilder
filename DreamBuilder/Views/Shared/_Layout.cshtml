@@ -24,52 +24,52 @@
 <body>
     <div class="container-fluid">
         <header class="bg-dreambuilder">
-            <nav class="navbar navbar-expand-lg navbar-light w-75 mx-auto font-weight-bold">
-                <a class="navbar-brand text-dreambuilder" href="#">
-                    <img src="~/images/favicon.png"> DreamBuilder
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-flex justify-content-between" id="navbarNav">
-                    <ul class="navbar-nav fontsizedb">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/Home/Index">Home</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/Home/About">About</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/Home/Contacts">Contacts</a>
-                        </li>
-                        @if (this.User.Identity.IsAuthenticated)
-                        {
+                <nav class="navbar navbar-expand-lg navbar-light font-weight-bold rounded">
+                    <a class="navbar-brand text-dreambuilder" href="#">
+                        <img src="~/images/favicon.png"> DreamBuilder
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-flex justify-content-between" id="navbarNav">
+                        <ul class="navbar-nav fontsizedb">
                             <li class="nav-item active">
-                                <div class="dropdown show">
-                                    <a class="nav-link active dropdown-toggle" href="#"
-                                       id="dropdownMenuLink"
-                                       data-toggle="dropdown"
-                                       aria-haspopup="true"
-                                       aria-expanded="false">
-                                        Products
-                                    </a>
-
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="/Products/All">All Products</a>
-                                        @if (this.User.IsInRole("Admin"))
-                                        {
-                                            <a class="dropdown-item" href="/Products/Create">Create Product</a>
-                                        }
-                                    </div>
-                                </div>
+                                <a class="nav-link" href="/Home/Index">Home</a>
                             </li>
-                        }
-                    </ul>
-                    <ul class="navbar-nav fontsizedb">
-                        <partial name="_LoginPartial" />
-                    </ul>
-                </div>
-            </nav>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Home/About">About</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Home/Contacts">Contacts</a>
+                            </li>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item active">
+                                    <div class="dropdown show">
+                                        <a class="nav-link active dropdown-toggle" href="#"
+                                           id="dropdownMenuLink"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            Products
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="/Products/All">All Products</a>
+                                            @if (this.User.IsInRole("Admin"))
+                                            {
+                                                <a class="dropdown-item" href="/Products/Create">Create Product</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        <ul class="navbar-nav fontsizedb">
+                            <partial name="_LoginPartial" />
+                        </ul>
+                    </div>
+                </nav>
         </header>
     </div>
 
@@ -78,12 +78,14 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
-    <div class="container-fluid bg-dreambuilder">
-        <footer class="border-top footer font-weight-bold mx-auto">
-            <p class="d-flex justify-content-center">&copy; CopyRight DreamBuilder Ltd.  2015 - @DateTime.UtcNow.Year</p>
-        </footer>
-    </div>
+    </div>   
+    <footer>
+        <div class="container-fluid w-auto mx-auto bg-dreambuilder rounded">
+            <div class="text-dreambuilder p-3 text-center font-weight-bold">
+               &copy; CopyRight DreamBuilder Ltd.  2015 - @DateTime.UtcNow.Year
+                </div>
+            </div>
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

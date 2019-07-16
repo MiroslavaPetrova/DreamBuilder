@@ -1,6 +1,5 @@
 ﻿using DreamBuilder.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DreamBuilder.Services.Contracts
 {
@@ -8,6 +7,6 @@ namespace DreamBuilder.Services.Contracts
     {
         void Create(Product product);
 
-        IQueryable<Product> GetAllProducts();
+        IEnumerable<TViewModel> GetAllProducts<TViewModel>();
     }
 }
