@@ -25,7 +25,9 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 120px;
     grid-row-gap: 170px;
+
 }
+
 
 
 

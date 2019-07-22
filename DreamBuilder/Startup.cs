@@ -93,12 +93,12 @@ namespace DreamBuilder
                             NormalizedName = "USER"
                         });
                     }
-                    //TODO remove this test code!!!! Make it with Seeder
+                   //TODO remove this test code!!!!Make it with Seeder
                     if (!context.Categories.Any())
                     {
                         context.Categories.Add(new Category { Name = "New" });
                         context.Categories.Add(new Category { Name = "Old" });
-                        
+
                     }
 
                     context.SaveChanges();

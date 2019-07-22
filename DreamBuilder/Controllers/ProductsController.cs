@@ -1,11 +1,10 @@
-﻿using DreamBuilder.Data;
-using DreamBuilder.Models;
+﻿using DreamBuilder.Models;
+using DreamBuilder.Models.Categories.ViewModels;
 using DreamBuilder.Models.Products.InputModels;
 using DreamBuilder.Models.Products.ViewModels;
 using DreamBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace DreamBuilder.Controllers
@@ -25,14 +24,22 @@ namespace DreamBuilder.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
+            var allCategories = this.categoriesService.GetAllCategories<CategoryAllViewModel>();
+
+            this.ViewData["categories"] = allCategories
+                                          .Select(productCategory => new CategoryCreateProductCategoryViewModel
+                                          { Name = productCategory.Name })
+                                          .ToList();
+
             return this.View();
         }
 
-        [AutoValidateAntiforgeryToken]
         [Authorize(Roles = "Admin")]
+        [AutoValidateAntiforgeryToken]
         [HttpPost]
         public IActionResult Create(ProductCreateInputModel inputModel)
         {
+           
             if (!ModelState.IsValid)
             {
                 return this.View();
@@ -58,6 +65,7 @@ namespace DreamBuilder.Controllers
         public IActionResult All()
         {
             var allProducts = this.productsService.GetAllProducts<ProductAllViewModel>();
+
             return this.View(allProducts);
         }
     }
