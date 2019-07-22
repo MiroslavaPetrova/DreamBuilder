@@ -27,6 +27,7 @@ namespace DreamBuilder.Models.Products.InputModels
         public string Description { get; set; }
 
         [Required]
+        [DataType(DataType.Upload)]
         [DisplayName("File image")]
         public IFormFile Image { get; set; }
 
