@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamBuilder.Data
-{                                                           // REDUNDANT || EXTENDED SOMEWHERE ELSE ???
+{                                                         
     public class DreamBuilderDbContext : IdentityDbContext<DreamBuilderUser, IdentityRole, string>
     {
         public DreamBuilderDbContext(DbContextOptions<DreamBuilderDbContext> options)

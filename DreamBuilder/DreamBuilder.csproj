@@ -23,6 +23,9 @@
 
 
   <ItemGroup>
+    <Content Update="Views\Products\All.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\css\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -35,11 +38,6 @@
     <Content Update="wwwroot\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
 </Project>

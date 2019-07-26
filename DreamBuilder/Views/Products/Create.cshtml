@@ -1,5 +1,5 @@
 ﻿@using DreamBuilder.Models.Categories.ViewModels
-@model DreamBuilder.Models.Products.InputModels.ProductCreateInputModel
+@model DreamBuilder.Models.Products.InputModels.ProductsCreateInputModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -12,13 +12,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="text-success h5"></label>
-                <input asp-for="Name" class="form-control text-success" type="text" id="name" placeholder="Name"/>
+                <input asp-for="Name" class="form-control text-success" type="text" id="name" placeholder="Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Make" class="text-success h5"></label>
-                <input asp-for="Make" class="form-control text-success" type="text" id="make" placeholder="Make" />
+                @*<input asp-for="Make" class="form-control text-success" type="text" id="make" placeholder="Make" />*@
                 <span asp-validation-for="Make" class="text-danger"></span>
+                <select class="form-control text-success" id="make" asp-for="Make">
+                    <option selected disabled>--- Select MAKE ---</option>
+                    <option>NEW HOLLAND</option>
+                    <option>JOHN DEER</option>
+                </select>
+                @*<span asp-validation-for="Category" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <label asp-for="Model" class="text-success h5"></label>
@@ -32,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="text-success h5"></label>
-                <input asp-for="Image" class="form-control text-success" type="file" id="image" placeholder="Upload image" />
+                <input asp-for="Image" class="form-control text-success" type="file" name="image" id="image" placeholder="Upload image" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">

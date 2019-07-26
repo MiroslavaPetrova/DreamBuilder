@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DreamBuilder.Models;
 using Microsoft.AspNetCore.Mvc;
-using DreamBuilder.Models;
+using System.Diagnostics;
 
 namespace DreamBuilder.Controllers
 {
@@ -14,7 +10,6 @@ namespace DreamBuilder.Controllers
         {
             return View();
         }
-
 
         // TODO implement Privacy route
         public IActionResult Privacy()

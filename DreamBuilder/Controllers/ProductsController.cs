@@ -34,23 +34,26 @@ namespace DreamBuilder.Controllers
                                           .Select(productCategory => new CategoryCreateProductCategoryViewModel
                                           { Name = productCategory.Name })
                                           .ToList();
-
+            //TODO Seed some makes & models in the DB & make them w/ select option when creating the product
             return this.View();
         }
 
         [Authorize(Roles = "Admin")]
         [AutoValidateAntiforgeryToken]
         [HttpPost]
-        public IActionResult Create(ProductCreateInputModel inputModel)
+        public IActionResult Create(ProductsCreateInputModel inputModel)
         {
-           
             if (!ModelState.IsValid)
             {
                 return this.View();
             }
 
+            // TODO try implement the AutoMapper here
+            // Product product = AutoMapper.Mapper.Map<Product>(inputModel);
+
             Product product = new Product
             {
+                Id = inputModel.Id,
                 Name = inputModel.Name,
                 Make = inputModel.Make,
                 Model = inputModel.Model,
@@ -60,29 +63,34 @@ namespace DreamBuilder.Controllers
                 ManufacturedOn = inputModel.ManufacturedOn,
                 Category = this.categoriesService.GetProductCategoryByName(inputModel.Category)
             };
-            if (inputModel.Image.Name.EndsWith("jpg") || inputModel.Image.Name.EndsWith("png"))
-            {
-                var fileName = this.hostingEnvironment.WebRootPath + "\\files-pictures\\";
-
-                using (var fileStream = new FileStream(fileName, FileMode.Create))
-                {
-                    inputModel.Image.CopyTo(fileStream);
-                }
-            }
-            var imagePath = "\\file-pictures\\" + product.Id;
-           
-            product.Image = imagePath;
 
             this.productsService.Create(product);
 
             return this.RedirectToAction("All");
         }
 
+        [HttpGet]
         public IActionResult All()
         {
-            var allProducts = this.productsService.GetAllProducts<ProductAllViewModel>();
+            var allProducts = this.productsService.GetAllProducts<ProductsAllViewModel>();
 
             return this.View(allProducts);
+        }
+
+        [HttpGet]
+        public IActionResult Details(string id)
+        {
+            Product product = this.productsService.GetById(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            ProductDetailsViewModel productDetailsViewModel
+               = AutoMapper.Mapper.Map<ProductDetailsViewModel>(product);
+
+            return this.View(productDetailsViewModel); 
         }
     }
 }

@@ -8,5 +8,7 @@ namespace DreamBuilder.Services.Contracts
         void Create(Product product);
 
         IEnumerable<TViewModel> GetAllProducts<TViewModel>();
+
+        Product GetById(string id);
     }
 }

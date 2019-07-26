@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DreamBuilder.Models
 {
-    public class Product
+    public class Product 
     {
         public Product()
         {

@@ -26,9 +26,21 @@ namespace DreamBuilder.Services
 
         public IEnumerable<TViewModel> GetAllProducts<TViewModel>()
         {
-            var allProducts = this.context.Products.To<TViewModel>().ToList();
+            var allProducts = this.context
+                .Products
+                .To<TViewModel>()
+                .ToList();
 
             return allProducts;
+        }
+
+        public Product GetById(string id)
+        {
+            var productId = this.context
+                .Products
+               .SingleOrDefault(product => product.Id == id);
+
+            return productId;
         }
     }
 }
