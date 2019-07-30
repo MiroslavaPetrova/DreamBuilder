@@ -6,7 +6,6 @@ using DreamBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 using System.Linq;
 
 namespace DreamBuilder.Controllers
@@ -25,6 +24,7 @@ namespace DreamBuilder.Controllers
             this.hostingEnvironment = hostingEnvironment;
         }
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
@@ -48,10 +48,11 @@ namespace DreamBuilder.Controllers
                 return this.View();
             }
 
-            // TODO try implement the AutoMapper here
-            // Product product = AutoMapper.Mapper.Map<Product>(inputModel);
+            //TODO try implement the AutoMapper here
+            //Product product = AutoMapper.Mapper.Map<Product>(inputModel);
 
-            Product product = new Product
+
+            Product product = new Product // TODO MOVE IT TO THE SERVICES. DO NOT EXPOSE THE ENTITY!!! => MAPPING FAILED
             {
                 Id = inputModel.Id,
                 Name = inputModel.Name,
@@ -60,9 +61,10 @@ namespace DreamBuilder.Controllers
                 Description = inputModel.Description,
                 Image = inputModel.Image.FileName,
                 Price = inputModel.Price,
-                ManufacturedOn = inputModel.ManufacturedOn,
+                ManufacturedOn = inputModel.ManufacturedOn, //change category taking
                 Category = this.categoriesService.GetProductCategoryByName(inputModel.Category)
             };
+            product.Category = this.categoriesService.GetProductCategoryByName(inputModel.Category);
 
             this.productsService.Create(product);
 
@@ -87,8 +89,8 @@ namespace DreamBuilder.Controllers
                 return NotFound();
             }
 
-            ProductDetailsViewModel productDetailsViewModel
-               = AutoMapper.Mapper.Map<ProductDetailsViewModel>(product);
+            ProductsDetailsViewModel productDetailsViewModel
+               = AutoMapper.Mapper.Map<ProductsDetailsViewModel>(product);
 
             return this.View(productDetailsViewModel); 
         }

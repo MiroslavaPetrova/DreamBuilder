@@ -94,14 +94,29 @@ namespace DreamBuilder
                         });
                     }
                    //TODO remove this test code!!!!Make it with Seeder
-                    if (!context.Categories.Any())
-                    {
-                        context.Categories.Add(new Category { Name = "New" });
-                        context.Categories.Add(new Category { Name = "Old" });
+                    //if (!context.Categories.Any())
+                    //{
+                    //    context.Categories.Add(new Category { Name = "New" });
+                    //    context.Categories.Add(new Category { Name = "Old" });
 
-                    }
+                    //}
 
                     context.SaveChanges();
+
+                    //if (!context.OrderStatuses.Any())
+                    //{
+                    //    context.OrderStatuses.Add(new OrderStatus
+                    //    {
+                    //        Name = "Active"
+                    //    });
+
+                    //    context.OrderStatuses.Add(new OrderStatus
+                    //    {
+                    //        Name = "Completed"
+                    //    });
+
+                    //    context.SaveChanges();
+                    //}
                 }
             }
             //TODO: We do not controll development env at this stage => remove it
