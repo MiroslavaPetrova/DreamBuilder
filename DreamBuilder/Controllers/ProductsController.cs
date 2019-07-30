@@ -48,9 +48,11 @@ namespace DreamBuilder.Controllers
                 return this.View();
             }
 
+           //Category categoryFromDb = this.categoriesService.GetProductCategoryByName(inputModel.Category);
+
             //TODO try implement the AutoMapper here
             //Product product = AutoMapper.Mapper.Map<Product>(inputModel);
-
+            //product.Category = this.categoriesService.GetProductCategoryByName(inputModel.Category);
 
             Product product = new Product // TODO MOVE IT TO THE SERVICES. DO NOT EXPOSE THE ENTITY!!! => MAPPING FAILED
             {
@@ -61,10 +63,9 @@ namespace DreamBuilder.Controllers
                 Description = inputModel.Description,
                 Image = inputModel.Image.FileName,
                 Price = inputModel.Price,
-                ManufacturedOn = inputModel.ManufacturedOn, //change category taking
+                ManufacturedOn = inputModel.ManufacturedOn, 
                 Category = this.categoriesService.GetProductCategoryByName(inputModel.Category)
             };
-            product.Category = this.categoriesService.GetProductCategoryByName(inputModel.Category);
 
             this.productsService.Create(product);
 

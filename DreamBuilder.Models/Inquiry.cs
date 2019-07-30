@@ -14,6 +14,6 @@ namespace DreamBuilder.Models
 
         public Product Product { get; set; }
 
-        public RequiryStatus Status { get; set; }
+        public InquiryStatus Status { get; set; }
     }
 }

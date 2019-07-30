@@ -14,6 +14,8 @@ using System.Linq;
 using DreamBuilder.Services.Mapping;
 using System.Reflection;
 using AutoMapper;
+using DreamBuilder.Models.Products.InputModels;
+using DreamBuilder.Models.Products.ViewModels;
 
 namespace DreamBuilder
 {
@@ -60,6 +62,7 @@ namespace DreamBuilder
 
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<ICategoriesService, CategoriesService>();
+            services.AddScoped<IOrdersService, OrdersService>();
 
             //Registers the service Automapper
             services.AddAutoMapper();
@@ -72,6 +75,10 @@ namespace DreamBuilder
         {
             //Configures AutoMapper
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(
+               typeof(ProductsCreateInputModel).GetTypeInfo().Assembly,
+               typeof(ProductsAllViewModel).GetTypeInfo().Assembly,
+               typeof(Product).GetTypeInfo().Assembly);
 
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
@@ -103,20 +110,20 @@ namespace DreamBuilder
 
                     context.SaveChanges();
 
-                    //if (!context.OrderStatuses.Any())
-                    //{
-                    //    context.OrderStatuses.Add(new OrderStatus
-                    //    {
-                    //        Name = "Active"
-                    //    });
+                    if (!context.OrderStatuses.Any())
+                    {
+                        context.OrderStatuses.Add(new OrderStatus
+                        {
+                            Name = "Active"
+                        });
 
-                    //    context.OrderStatuses.Add(new OrderStatus
-                    //    {
-                    //        Name = "Completed"
-                    //    });
+                        context.OrderStatuses.Add(new OrderStatus
+                        {
+                            Name = "Completed"
+                        });
 
-                    //    context.SaveChanges();
-                    //}
+                        context.SaveChanges();
+                    }
                 }
             }
             //TODO: We do not controll development env at this stage => remove it

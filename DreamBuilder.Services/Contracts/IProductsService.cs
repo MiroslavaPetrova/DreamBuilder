@@ -10,5 +10,6 @@ namespace DreamBuilder.Services.Contracts
         IEnumerable<TViewModel> GetAllProducts<TViewModel>();
 
         Product GetById(string id);
+
     }
 }

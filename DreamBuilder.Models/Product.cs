@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 namespace DreamBuilder.Models
 {
-    public class Product 
+    public class Product
+
     {
         public Product()
         {
             this.Inquiries = new List<Inquiry>();
-
-            this.Orders = new List<ProductOrder>();
         }
 
         public string Id { get; set; }
@@ -34,6 +33,5 @@ namespace DreamBuilder.Models
 
         public virtual ICollection<Inquiry> Inquiries { get; set; }
 
-        public virtual ICollection<ProductOrder> Orders { get; set; }
     }
 }

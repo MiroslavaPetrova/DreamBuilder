@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DreamBuilder.Models
 {
     public class Order
     {
-        public Order()
-        {
-            this.Products = new List<ProductOrder>();
-        }
-
         public string Id { get; set; }
 
         public DateTime CreationDate { get; set; }
 
-        //public DateTime? EstimatedDeliveryDate { get; set; } ???
+        public string ProductId { get; set; }
+
+        public Product Product { get; set; }
+
+        public int Quantity { get; set; }
 
         public string CustomerId { get; set; }
 
@@ -24,6 +22,8 @@ namespace DreamBuilder.Models
 
         public Invoice Invoice { get; set; }
 
-        public virtual ICollection<ProductOrder> Products { get; set; }
+        public int StatusId { get; set; }
+
+        public OrderStatus Status { get; set; }
     }
 }

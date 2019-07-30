@@ -14,6 +14,8 @@ namespace DreamBuilder.Data
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
+
         public DbSet<Inquiry> Inquiries { get; set; }
 
         public DbSet<Category> Categories { get; set; }
@@ -22,8 +24,8 @@ namespace DreamBuilder.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<ProductOrder>()
-                .HasKey(po => new { po.ProductId, po.OrderId });
+        //    builder.Entity<ProductOrder>()
+        //        .HasKey(po => new { po.ProductId, po.OrderId });
 
             builder.Entity<Order>()
                 .HasOne(order => order.Invoice)
