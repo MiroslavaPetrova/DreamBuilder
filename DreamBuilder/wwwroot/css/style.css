@@ -24,12 +24,6 @@
     grid-template-rows: 100px 200px;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 120px;
-    grid-row-gap: 170px;
-
+    grid-row-gap: 300px;
 }
-
-
-
-
-
 

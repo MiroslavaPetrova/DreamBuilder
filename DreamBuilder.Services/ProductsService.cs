@@ -19,8 +19,12 @@ namespace DreamBuilder.Services
             this.categoriesService = categoriesService;
         }
 
-        public void Create(Product product)   //TODO: think about changing this method
+        public void Add(Product product)  
         {
+            Category categoryFromDb = this.categoriesService.GetProductCategoryByName(product.Category.Name);
+
+            product.Category = categoryFromDb;
+
             this.context.Products.Add(product);
             this.context.SaveChanges();
         }
@@ -45,7 +49,7 @@ namespace DreamBuilder.Services
 
             return productFromDb;
 
-            //TODO Need to map more than the ID
+            //TODO Need to map more than the ID so include categories
 
             //var productId = this.context
             //    .Products

@@ -5,7 +5,7 @@ namespace DreamBuilder.Services.Contracts
 {
     public interface IProductsService
     {
-        void Create(Product product);
+        void Add(Product product);
 
         IEnumerable<TViewModel> GetAllProducts<TViewModel>();
 

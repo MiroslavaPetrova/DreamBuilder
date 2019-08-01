@@ -15,13 +15,15 @@ namespace DreamBuilder.Controllers
         private readonly IProductsService productsService;
         private readonly ICategoriesService categoriesService;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ICloudinaryService cloudinaryService;
 
         public ProductsController(IProductsService productsService,
-            ICategoriesService categoriesService, IHostingEnvironment hostingEnvironment)
+            ICategoriesService categoriesService, IHostingEnvironment hostingEnvironment, ICloudinaryService cloudinaryService)
         {
             this.productsService = productsService;
             this.categoriesService = categoriesService;
             this.hostingEnvironment = hostingEnvironment;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
@@ -48,26 +50,14 @@ namespace DreamBuilder.Controllers
                 return this.View();
             }
 
-           //Category categoryFromDb = this.categoriesService.GetProductCategoryByName(inputModel.Category);
+            Product product = AutoMapper.Mapper.Map<Product>(inputModel);
+          
+            string imageUrl = this.cloudinaryService
+                .UploadImage(inputModel.Image, inputModel.Name);
 
-            //TODO try implement the AutoMapper here
-            //Product product = AutoMapper.Mapper.Map<Product>(inputModel);
-            //product.Category = this.categoriesService.GetProductCategoryByName(inputModel.Category);
-
-            Product product = new Product // TODO MOVE IT TO THE SERVICES. DO NOT EXPOSE THE ENTITY!!! => MAPPING FAILED
-            {
-                Id = inputModel.Id,
-                Name = inputModel.Name,
-                Make = inputModel.Make,
-                Model = inputModel.Model,
-                Description = inputModel.Description,
-                Image = inputModel.Image.FileName,
-                Price = inputModel.Price,
-                ManufacturedOn = inputModel.ManufacturedOn, 
-                Category = this.categoriesService.GetProductCategoryByName(inputModel.Category)
-            };
-
-            this.productsService.Create(product);
+            product.Image = imageUrl;
+           
+            this.productsService.Add(product);
 
             return this.RedirectToAction("All");
         }

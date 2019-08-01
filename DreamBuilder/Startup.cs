@@ -1,7 +1,12 @@
-﻿using DreamBuilder.Data;
+﻿using AutoMapper;
+using CloudinaryDotNet;
+using DreamBuilder.Data;
 using DreamBuilder.Models;
+using DreamBuilder.Models.Products.InputModels;
+using DreamBuilder.Models.Products.ViewModels;
 using DreamBuilder.Services;
 using DreamBuilder.Services.Contracts;
+using DreamBuilder.Services.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,11 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
-using DreamBuilder.Services.Mapping;
 using System.Reflection;
-using AutoMapper;
-using DreamBuilder.Models.Products.InputModels;
-using DreamBuilder.Models.Products.ViewModels;
 
 namespace DreamBuilder
 {
@@ -60,12 +61,22 @@ namespace DreamBuilder
                 .AddEntityFrameworkStores<DreamBuilderDbContext>()
                 .AddDefaultTokenProviders();
 
+            Account cloudinaryCredentials = new Account(
+               this.Configuration["Cloudinary:CloudName"],
+               this.Configuration["Cloudinary:ApiKey"],
+               this.Configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
+
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IOrdersService, OrdersService>();
+            services.AddScoped<ICloudinaryService, CloudinaryService>();
 
             //Registers the service Automapper
-            services.AddAutoMapper();
+            //services.AddAutoMapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -78,6 +89,7 @@ namespace DreamBuilder
             AutoMapperConfig.RegisterMappings(
                typeof(ProductsCreateInputModel).GetTypeInfo().Assembly,
                typeof(ProductsAllViewModel).GetTypeInfo().Assembly,
+               typeof(ProductsDetailsViewModel).GetTypeInfo().Assembly,
                typeof(Product).GetTypeInfo().Assembly);
 
             using (var serviceScope = app.ApplicationServices.CreateScope())
@@ -100,14 +112,6 @@ namespace DreamBuilder
                             NormalizedName = "USER"
                         });
                     }
-                   //TODO remove this test code!!!!Make it with Seeder
-                    //if (!context.Categories.Any())
-                    //{
-                    //    context.Categories.Add(new Category { Name = "New" });
-                    //    context.Categories.Add(new Category { Name = "Old" });
-
-                    //}
-
                     context.SaveChanges();
 
                     if (!context.OrderStatuses.Any())
