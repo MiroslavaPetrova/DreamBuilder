@@ -1,0 +1,34 @@
+﻿@model IEnumerable<DreamBuilder.Models.Categories.ViewModels.CategoryAllViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Categories" asp-action="SearchByCategory" method="get">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group font-weight-bold mt-5">
+                    @Html.TextBox("search")<input type="submit" value="Search" placeholder="Search..." />
+                </div>
+            </form>
+            @*@foreach (var category in Model)
+            {
+                <p>@category.Name</p>
+
+            }*@
+        </div>
+      
+    </div>
+
+
+  
+
+<div>
+    <a asp-action="Index">Back to top</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

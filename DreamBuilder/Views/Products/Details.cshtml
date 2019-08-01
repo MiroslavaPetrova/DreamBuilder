@@ -1,0 +1,34 @@
+﻿@model DreamBuilder.Models.Products.ViewModels.ProductsDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class="mt-5 d-flex justify-content-around">Product details</h2>
+
+<div class="d-flex justify-content-around row mt-5  catsandstars">
+    <div id="product-image-and-navigation-holder" >
+        <div id="image-holder" >
+            <img src="@Model.Image"
+                 alt="..."/>
+            <form asp-controller="Orders" asp-action="Create" method="post" >
+                <input type="hidden" value="@Model.Id" name="productId" />
+                <div id="navigation-holder" class="mt-4 d-flex justify-content-around">
+                    <button class="btn bg-dreambuilder text-dark font-weight-bold">Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="product-data-holder">
+        <h3 class="text-center shadow"> Name: <span class="text-success ">@Model.Name</span></h3>
+        <h3 class="text-center shadow">Make: <span class="text-success "> @Model.Make</span></h3>
+        <h3 class="text-center shadow">Model: <span class="text-success "> @Model.Model</span></h3>
+        <h3 class="text-center shadow">Category: <span class="text-success "> @Model.Category.Name</span></h3>
+        <h3 class="text-center shadow">Manufactured On: <span class="text-success ">@Model.ManufacturedOn.ToString("dd/MM/yyyy")</span></h3>
+        <h3 class="text-center shadow">Price: <span class="text-success ">&#163;@Model.Price.ToString("F2")</span></h3>
+        <p class="text-center shadow">
+            <h3 class="text-center shadow">Description: <span class="text-success">@Model.Description</span></h3>
+        </p>
+    </div>
+</div>
+
