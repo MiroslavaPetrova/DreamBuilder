@@ -4,6 +4,8 @@ using DreamBuilder.Models.Categories.ViewModels;
 using DreamBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DreamBuilder.Controllers
 {
@@ -17,11 +19,22 @@ namespace DreamBuilder.Controllers
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(string search)         // remove it or add the search functionality in here
         {
-            var allCategories = this.categoriesService.GetAllCategories<CategoryAllViewModel>();
+            List<ProductsSearchByCategoryViewModel> categories = this.categoriesService.SarchByCategory(search)
+                .Select(cat => new ProductsSearchByCategoryViewModel
+                {
+                    Name = cat.Name,
+                    Category = cat.Category.Name,
+                    Image = cat.Image
+                })
+                .ToList();
 
-            return this.View(allCategories);
+
+            return this.View(categories);
+            //var allCategories = this.categoriesService.GetAllCategories<CategoryAllViewModel>();
+
+            //return this.View(allCategories);
         }
 
         [Authorize(Roles = "Admin")]
@@ -39,14 +52,22 @@ namespace DreamBuilder.Controllers
 
             this.categoriesService.AddProductCategory(productCategory);
 
-            return this.RedirectToAction("All");
+            return this.Redirect("/Products/Create");   //TODO change redirect to /product/create
         }
 
-        public IActionResult SearchByCategory(string search)
-        {
-            var categories = this.categoriesService.SarchByCategory(search);
+        //public IActionResult SearchByCategory(string search)
+        //{
+        //    List<ProductsSearchByCategoryViewModel> categories = this.categoriesService.SarchByCategory(search)
+        //        .Select(cat => new ProductsSearchByCategoryViewModel
+        //        {
+        //            Name = cat.Name,
+        //            Category = cat.Category.Name,
+        //            Image = cat.Image
+        //        })
+        //        .ToList();
 
-            return this.View();
-        }
+
+        //    return this.View(categories);
+        //}
     }
 }

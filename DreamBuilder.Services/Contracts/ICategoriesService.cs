@@ -1,5 +1,6 @@
 ﻿using DreamBuilder.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DreamBuilder.Services.Contracts
 {
@@ -11,6 +12,6 @@ namespace DreamBuilder.Services.Contracts
 
         void AddProductCategory(Category category);
 
-        IEnumerable<Category> SarchByCategory(string search);
+        IQueryable<Product> SarchByCategory(string search);
     }
 }

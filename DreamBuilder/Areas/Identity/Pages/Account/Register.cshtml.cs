@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using DreamBuilder.Models;
 using Microsoft.AspNetCore.Authorization;
-using DreamBuilder.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DreamBuilder.Areas.Identity.Pages.Account
 {
@@ -19,17 +14,14 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<DreamBuilderUser> _signInManager;
         private readonly UserManager<DreamBuilderUser> _userManager;
-        //private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<DreamBuilderUser> userManager,
             SignInManager<DreamBuilderUser> signInManager
-            //IEmailSender emailSender
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            //_emailSender = emailSender;
         }
 
         [BindProperty]
@@ -41,7 +33,7 @@ namespace DreamBuilder.Areas.Identity.Pages.Account
         {
             //TODO: Add validations for username + errorMessage 
             [Required]
-            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             [Display(Name = "Username")]
             public string Username { get; set; }
 

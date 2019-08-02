@@ -2,6 +2,7 @@
 using DreamBuilder.Models;
 using DreamBuilder.Services.Contracts;
 using DreamBuilder.Services.Mapping;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,12 +39,14 @@ namespace DreamBuilder.Services
             this.context.SaveChanges();
         }
 
-        public IEnumerable<Category> SarchByCategory(string search)
+        public IQueryable<Product> SarchByCategory(string search)
         {
-            var category = this.context.Categories
-               .Where(x => x.Name.Contains(search) || search == null).ToList();
+            var productsByCat = this.context
+                .Products
+                .Include(p => p.Category)
+                .Where(p => p.Category.Name.Contains(search));
 
-            return category;
+            return productsByCat;
         }
     }
 }

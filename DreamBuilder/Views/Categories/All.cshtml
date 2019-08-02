@@ -1,35 +1,49 @@
-﻿@model IEnumerable<DreamBuilder.Models.Categories.ViewModels.CategoryAllViewModel>
+﻿@model List<DreamBuilder.Models.Categories.ViewModels.ProductsSearchByCategoryViewModel>
 
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "Index";
 }
 
-<h1>All</h1>
+<div class="container mt-5">
+    <form asp-controller="Categories" asp-action="All" method="get">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter category..." name="search" />
+            <div class="input-group-btn">
+                <button class="btn bg-dreambuilderKhaki font-weight-bold" type="submit">
+                    <i class="text-center"></i>Search
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="grid container-fluid justify-content-around mt-5">
+        @if (Model.Count() == 0)
+        {
+            <span></span>
+            <span class="font-weight-bold text-danger">No matches for your search!</span>
+        }
+        else 
+        {
+            @foreach (var product in Model)
+            {
+                <div class="row">
+                    <div>
+                        <div class="col-md-3">
+                            <span class="font-weight-bold shadow">@product.Name</span>
+                            <span class="font-weight-bold shadow">@product.Category</span>
+                            <a href="/Products/All/@product.Id" class="view-product=category">
+                                <img src="@product.Image" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-    </tbody>
-</table>
+

@@ -25,7 +25,7 @@ namespace DreamBuilder.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(OrdersCreateInputModel inputModel)
+        public IActionResult Create(OrdersCreateInputModel inputModel) // just to map productId
         {
             Order order = AutoMapper.Mapper.Map<Order>(inputModel);
 
@@ -36,6 +36,5 @@ namespace DreamBuilder.Controllers
 
             return this.Redirect("/Products/All");
         }
-
     }
 }

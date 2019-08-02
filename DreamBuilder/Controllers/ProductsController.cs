@@ -17,8 +17,8 @@ namespace DreamBuilder.Controllers
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ICloudinaryService cloudinaryService;
 
-        public ProductsController(IProductsService productsService,
-            ICategoriesService categoriesService, IHostingEnvironment hostingEnvironment, ICloudinaryService cloudinaryService)
+        public ProductsController(IProductsService productsService, ICategoriesService categoriesService,
+           IHostingEnvironment hostingEnvironment, ICloudinaryService cloudinaryService)
         {
             this.productsService = productsService;
             this.categoriesService = categoriesService;

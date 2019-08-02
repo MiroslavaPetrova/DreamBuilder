@@ -4,6 +4,6 @@ namespace DreamBuilder.Models.Categories.ViewModels
 {
     public class CategoryAllViewModel : IMapFrom<Category>
     {
-        public string Name { get; set; }
+        public string  Name { get; set; }
     }
 }
