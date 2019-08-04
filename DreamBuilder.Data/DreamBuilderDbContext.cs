@@ -24,14 +24,14 @@ namespace DreamBuilder.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-        //    builder.Entity<ProductOrder>()
-        //        .HasKey(po => new { po.ProductId, po.OrderId });
+            //    builder.Entity<ProductOrder>()
+            //        .HasKey(po => new { po.ProductId, po.OrderId });
 
-            builder.Entity<Order>()
-                .HasOne(order => order.Invoice)
-                .WithOne(invoice => invoice.Order)
-                .HasForeignKey<Invoice>(order => order.OrderId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<Order>()
+            //    .HasOne(order => order.Invoice)
+            //    .WithOne(invoice => invoice.Order)
+            //    .HasForeignKey<Invoice>(order => order.OrderId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

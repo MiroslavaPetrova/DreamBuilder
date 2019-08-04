@@ -41,12 +41,12 @@ namespace DreamBuilder.Services
 
         public IQueryable<Product> SarchByCategory(string search)
         {
-            var productsByCat = this.context
+            var productByCategory = this.context
                 .Products
                 .Include(p => p.Category)
                 .Where(p => p.Category.Name.Contains(search));
 
-            return productsByCat;
+            return productByCategory;
         }
     }
 }

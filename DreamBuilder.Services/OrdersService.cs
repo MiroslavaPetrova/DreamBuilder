@@ -2,6 +2,7 @@
 using DreamBuilder.Models;
 using DreamBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace DreamBuilder.Services
@@ -9,7 +10,6 @@ namespace DreamBuilder.Services
     public class OrdersService : IOrdersService
     {
         private readonly DreamBuilderDbContext context;
-        private readonly UserManager<DreamBuilderUser> userManager;
 
         public OrdersService(DreamBuilderDbContext context)
         {
@@ -22,6 +22,15 @@ namespace DreamBuilder.Services
 
             this.context.Orders.Add(order);
             this.context.SaveChanges();
+        }
+
+        public IQueryable<Order> GetActiveOrders()
+        {
+            var activeOrders = this.context.Orders
+                .Include(order => order.Status)
+                .Where(order => order.Status.Name == "Active");
+
+            return activeOrders;
         }
     }
 }
