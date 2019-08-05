@@ -73,6 +73,7 @@ namespace DreamBuilder
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IOrdersService, OrdersService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<ICloudinaryService, CloudinaryService>();
 
             //Registers the service Automapper

@@ -2,14 +2,12 @@
 using DreamBuilder.Models.Orders.InputModels;
 using DreamBuilder.Models.Orders.ViewModels;
 using DreamBuilder.Services.Contracts;
+using DreamBuilder.Services.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using DreamBuilder.Services.Mapping;
-using DreamBuilder.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace DreamBuilder.Controllers
 {
@@ -17,11 +15,13 @@ namespace DreamBuilder.Controllers
     {
         private readonly IOrdersService ordersService;
         private readonly IProductsService productsService;
+        private readonly IInvoiceService invoiceService;
 
-        public OrdersController(IOrdersService ordersService, IProductsService productsService)
+        public OrdersController(IOrdersService ordersService, IProductsService productsService, IInvoiceService invoiceService)
         {
             this.ordersService = ordersService;
             this.productsService = productsService;
+            this.invoiceService = invoiceService;
         }
 
         //public IActionResult Create()
@@ -45,7 +45,6 @@ namespace DreamBuilder.Controllers
         [HttpGet]
         public IActionResult My()
         {
-
             List<OrdersMyViewModel> myOrders = this.ordersService.GetActiveOrders()
             .Where(order => order.CustomerId == this.User.FindFirst(ClaimTypes.NameIdentifier).Value)
             .To<OrdersMyViewModel>()
@@ -63,10 +62,19 @@ namespace DreamBuilder.Controllers
 
             return this.View(myOrders);
         }
-        [HttpGet]
+
+        [HttpPost]
         public IActionResult Complete()
         {
-            return null;
+            //TODO: 
+            // get the currently logged user Id and coplete the order => status == 2;
+            // generate invoice for this specific order
+
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            string invoiceId = this.invoiceService.CreateInvoice(currentUserId);
+
+            return this.Redirect("/Invoices/My"); //  /Invoives/My
         }
     }
 }

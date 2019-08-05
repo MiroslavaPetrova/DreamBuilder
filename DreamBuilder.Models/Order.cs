@@ -18,9 +18,9 @@ namespace DreamBuilder.Models
 
         public DreamBuilderUser Customer { get; set; }
 
-        //public string InvoiceId { get; set; }   //TODO: remove them => Invoice is automatically generated
+        public string InvoiceId { get; set; }   //TODO: remove them => Invoice is automatically generated
 
-        //public Invoice Invoice { get; set; }
+        public Invoice Invoice { get; set; }
 
         public int StatusId { get; set; }
 

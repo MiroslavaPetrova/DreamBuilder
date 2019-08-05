@@ -8,5 +8,9 @@ namespace DreamBuilder.Services.Contracts
         void CreateOrder(Order order);
 
         IQueryable<Order> GetActiveOrders();
+
+        void Complete(string orderId);
+
+        void FindOrdersOfAnInvoice(Invoice invoice);
     }
 }
