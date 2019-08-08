@@ -13,10 +13,10 @@
                 <a href="/Products/Details/@product.Id" class="view-product">
                     <img src="@product.Image" />
                 </a>
-                <h5 class="text-left">Name: @product.Name</h5>
-                <h5 class="text-left">Category: @product.Category.Name</h5>
-                <h5 class="text-left">Make: @product.Make</h5>
-                <h5 class="product-price">Price: &#163;@product.Price.ToString("F2")</h5>
+                <h5 class="text-left">Name: <span class="text-success ">@product.Name</span></h5>
+                <h5 class="text-left">Category: <span class="text-success ">@product.Category.Name</span></h5>
+                <h5 class="text-left">Make: <span class="text-success">@product.Make</span></h5>
+                <h5 class="product-price">Price: <span class="text-success">&#163;@product.Price.ToString("F2")</span></h5>
             </div>
         </div>
     }

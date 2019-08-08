@@ -4,16 +4,16 @@
     ViewData["Title"] = "Details";
 }
 
-<h2 class="mt-5 d-flex justify-content-around">Product details</h2>
+<h2 class="mt-5 d-flex justify-content-around  shadow bg-dreambuilderKhaki">Product details</h2>
 
 <div class="d-flex justify-content-around row mt-5">
-    <div id="product-image-and-navigation-holder" >
+    <div id="product-image" >
         <div id="image-holder" >
             <img src="@Model.Image"
                  alt="..."/>
             <form asp-controller="Orders" asp-action="Create" method="post" >
                 <input type="hidden" value="@Model.Id" name="productId" />
-                <div id="navigation-holder" class="mt-4 d-flex justify-content-around">
+                <div id="navigation-holder" class="mt-4 m-md-3 d-flex justify-content-around">
                     <button class="btn bg-dreambuilder text-dark font-weight-bold">Order</button>
                 </div>
             </form>

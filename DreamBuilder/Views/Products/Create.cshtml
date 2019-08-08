@@ -5,9 +5,8 @@
 }
 
 <h5 class="mt-md-4 mx-md-4 shadow bg-dreambuilderKhaki w-25 d-flex justify-content-center rounded">Create new product</h5>
-<hr class="bg-success" />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 mt-3">
         <form asp-controller="Products" asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -18,20 +17,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Make" class="text-success h5"></label>
-                @*<input asp-for="Make" class="form-control text-success" type="text" id="make" placeholder="Make" />*@
-                <span asp-validation-for="Make" class="text-danger"></span>
                 <select class="form-control text-success" id="make" asp-for="Make">
                     <option selected disabled>--- Select MAKE ---</option>
                     <option>JCB</option>
                     <option>NEW HOLLAND</option>
-                    <option>CATERPILLAR</option>
+                    <option>HYUNDAI</option>
                 </select>
-                @*<span asp-validation-for="Category" class="text-danger"></span>*@
+                <span asp-validation-for="Make" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Model" class="text-success h5"></label>
-                @*<input asp-for="Model" class="form-control text-success" type="text" id="model" placeholder="Model" />*@
-                <span asp-validation-for="Model" class="text-danger"></span>
                 <select class="form-control text-success" id="model" asp-for="Model">
                     <option selected disabled>--- Select MODEL ---</option>
                     <option>4CX</option>
@@ -39,6 +34,7 @@
                     <option>Multi Terrain Loader 55269</option>
                     <option>DragLine</option>
                 </select>
+                <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="text-success h5"></label>
@@ -62,7 +58,6 @@
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="text-success h5"></label>
-                <span asp-validation-for="Category" class="text-danger"></span>
                 <select class="form-control text-success" id="category" asp-for="Category">
                     <option selected disabled>--- Select Product Category ---</option>
                     @foreach (var category in (IEnumerable<CategoryCreateProductCategoryViewModel>)this.ViewData["categories"])
@@ -73,16 +68,12 @@
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group d-flex justify-content-lg-around mt-5">
-                <input type="submit" value="Create" class="btn bg-dreambuilder text-success" />
+                <input type="submit" value="Create" class="btn bg-dreambuilder text-dark font-weight-bold" />
             </div>
         </form>
     </div>
 </div>
-
-<div class="text-right">
-    <a asp-action="Index" class="btn bg-success rounded">Back to top</a>
-</div>
-
+ 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

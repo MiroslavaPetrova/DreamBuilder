@@ -39,7 +39,7 @@ namespace DreamBuilder.Controllers
             order.CreationDate = DateTime.UtcNow;
             this.ordersService.CreateOrder(order);
 
-            return this.Redirect("/Products/All");
+            return this.Redirect("/Products/All");   // TODO redirect to /Orders/Complete
         }
 
         [HttpGet]
@@ -74,7 +74,8 @@ namespace DreamBuilder.Controllers
 
             string invoiceId = this.invoiceService.CreateInvoice(currentUserId);
 
-            return this.Redirect("/Invoices/My"); //  /Invoives/My
+            return this.Redirect($"/Invoices/My/{currentUserId}"); //  /Invoives/My || $Invoices/My{invoiceId}
+                                                  // Create the invoices/my viewModel & View
         }
     }
 }

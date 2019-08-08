@@ -1,5 +1,3 @@
-using System;
-
 namespace DreamBuilder.Models
 {
     public class ErrorViewModel

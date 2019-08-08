@@ -1,5 +1,6 @@
 ﻿using DreamBuilder.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 
 namespace DreamBuilder.Controllers
@@ -11,7 +12,7 @@ namespace DreamBuilder.Controllers
             return View();
         }
 
-        // TODO implement Privacy route
+        // TODO implement Privacy 
         public IActionResult Privacy()
         {
             return View();

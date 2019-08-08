@@ -23,13 +23,13 @@ namespace DreamBuilder.Controllers
         public IActionResult All(string search)     //TODO using DreamBuilder.Services.Mapping;   AUTOMAP!!!!!!!
         {
             List<ProductsSearchByCategoryViewModel> categories = this.categoriesService.SarchByCategory(search)
-                .To<ProductsSearchByCategoryViewModel>()
-                //.Select(category => new ProductsSearchByCategoryViewModel
-                //{
-                //    Name = category.Name,                              //TODO: test it and remove it
-                //    Category = category.Category.Name,
-                //    Image = category.Image
-                //})
+                //.To<ProductsSearchByCategoryViewModel>()
+                .Select(category => new ProductsSearchByCategoryViewModel
+                {
+                    Name = category.Name,                            
+                    Category = category.Category.Name,
+                    Image = category.Image
+                })
                 .ToList();
 
             return this.View(categories);
