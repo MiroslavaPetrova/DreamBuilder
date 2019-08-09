@@ -46,6 +46,11 @@ namespace DreamBuilder.Controllers
         [HttpPost]
         public IActionResult Create(ProductCategoryCreateInputModel productCategoryCreateInputModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             Category productCategory = AutoMapper.Mapper.Map<Category>(productCategoryCreateInputModel);
 
             this.categoriesService.AddProductCategory(productCategory);

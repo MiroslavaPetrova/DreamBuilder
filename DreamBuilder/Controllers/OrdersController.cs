@@ -39,7 +39,7 @@ namespace DreamBuilder.Controllers
             order.CreationDate = DateTime.UtcNow;
             this.ordersService.CreateOrder(order);
 
-            return this.Redirect("/Products/All");   // TODO redirect to /Orders/Complete
+            return this.Redirect("/Orders/My"); 
         }
 
         [HttpGet]
