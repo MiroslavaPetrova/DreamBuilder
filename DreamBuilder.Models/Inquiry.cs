@@ -1,4 +1,4 @@
-﻿using DreamBuilder.Models.Enums;
+﻿using System;
 
 namespace DreamBuilder.Models
 {
@@ -6,7 +6,11 @@ namespace DreamBuilder.Models
     {
         public string Id { get; set; }
 
-        public string Text { get; set; }
+        public string Content { get; set; }
+
+        public DateTime PlacedOn { get; set; } // add this after dropping the DB
+
+        public string UserId { get; set; }
 
         public DreamBuilderUser User { get; set; }
 

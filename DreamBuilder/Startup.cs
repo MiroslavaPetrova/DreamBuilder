@@ -74,6 +74,7 @@ namespace DreamBuilder
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IOrdersService, OrdersService>();
             services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IInquiryService, InquiryService>();
             services.AddScoped<ICloudinaryService, CloudinaryService>();
 
             //Registers the service Automapper
@@ -125,6 +126,21 @@ namespace DreamBuilder
                         context.OrderStatuses.Add(new OrderStatus
                         {
                             Name = "Completed"
+                        });
+
+                        context.SaveChanges();
+                    }
+
+                    if (!context.InquiryStatuses.Any())
+                    {
+                        context.InquiryStatuses.Add(new InquiryStatus
+                        {
+                            Name = "Pending"
+                        });
+
+                        context.InquiryStatuses.Add(new InquiryStatus
+                        {
+                            Name = "Replied"
                         });
 
                         context.SaveChanges();

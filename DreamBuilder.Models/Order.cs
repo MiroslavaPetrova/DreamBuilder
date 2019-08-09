@@ -12,8 +12,6 @@ namespace DreamBuilder.Models
 
         public Product Product { get; set; }
 
-        public int Quantity { get; set; }
-
         public string CustomerId { get; set; }
 
         public DreamBuilderUser Customer { get; set; }

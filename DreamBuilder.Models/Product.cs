@@ -6,10 +6,10 @@ namespace DreamBuilder.Models
     public class Product
 
     {
-        public Product()
-        {
-            this.Inquiries = new List<Inquiry>();
-        }
+        //public Product()
+        //{
+        //    this.Inquiries = new List<Inquiry>();
+        //}
 
         public string Id { get; set; }
 
@@ -31,7 +31,7 @@ namespace DreamBuilder.Models
 
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<Inquiry> Inquiries { get; set; }
+        //public virtual ICollection<Inquiry> Inquiries { get; set; }  // may occur an SQL Exception!!!
 
     }
 }

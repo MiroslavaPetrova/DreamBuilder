@@ -24,17 +24,11 @@ namespace DreamBuilder.Controllers
             this.invoiceService = invoiceService;
         }
 
-        //public IActionResult Create()
-        //{
-        //    return this.View();
-        //}
-
         [HttpPost]
         public IActionResult Create(OrdersCreateInputModel inputModel) // just to map productId
         {
             Order order = AutoMapper.Mapper.Map<Order>(inputModel);
 
-            //using Microsoft.AspNetCore.Http;
             order.CustomerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             order.CreationDate = DateTime.UtcNow;
             this.ordersService.CreateOrder(order);

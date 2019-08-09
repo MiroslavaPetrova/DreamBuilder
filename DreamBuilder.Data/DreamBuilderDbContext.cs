@@ -18,6 +18,8 @@ namespace DreamBuilder.Data
 
         public DbSet<Inquiry> Inquiries { get; set; }
 
+        public DbSet<InquiryStatus> InquiryStatuses { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Invoice> Invoices { get; set; }
