@@ -37,7 +37,7 @@ namespace DreamBuilder.Services
         {
             var activeOrder = this.context.Orders.SingleOrDefault(order => order.Id == orderId);
 
-            //if (activeOrder == null || activeOrder.Status.Name != "Active")
+            //if (activeOrder == null || activeOrder.Status.Name != "Active")     //TODO test it
             //{
             //    throw new ArgumentException(nameof(activeOrder));
             //}

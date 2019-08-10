@@ -9,11 +9,11 @@ namespace DreamBuilder.Controllers
 {
     public class InquiriesController : Controller
     {
-        private readonly IInquiryService inquiryService;
+        private readonly IInquiriesService inquiriesService;
 
-        public InquiriesController(IInquiryService inquiryService)
+        public InquiriesController(IInquiriesService inquiriesService)
         {
-            this.inquiryService = inquiryService;
+            this.inquiriesService = inquiriesService;
         }
 
         [HttpPost]
@@ -23,7 +23,7 @@ namespace DreamBuilder.Controllers
 
             inquiry.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             inquiry.PlacedOn = DateTime.UtcNow;
-            this.inquiryService.CreateInquiry(inquiry);
+            this.inquiriesService.CreateInquiry(inquiry);
 
             //return this.Redirect("/Inquiries/My"); 
 

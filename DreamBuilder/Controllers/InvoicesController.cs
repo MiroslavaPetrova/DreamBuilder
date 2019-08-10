@@ -1,21 +1,20 @@
 ﻿using DreamBuilder.Models.Invoices.ViewModels;
 using DreamBuilder.Services.Contracts;
-using Microsoft.AspNetCore.Mvc;
 using DreamBuilder.Services.Mapping;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
-using DreamBuilder.Models;
 
 namespace DreamBuilder.Controllers
 {
     public class InvoicesController : Controller
     {
-        private readonly IInvoiceService invoiceService;
+        private readonly IInvoicesService invoicesService;
 
-        public InvoicesController(IInvoiceService invoiceService)
+        public InvoicesController(IInvoicesService invoicesService)
         {
-            this.invoiceService = invoiceService;
+            this.invoicesService = invoicesService;
         }
 
         [HttpGet]
@@ -26,7 +25,7 @@ namespace DreamBuilder.Controllers
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             List<InvoicesMyViewModel> myInvoices =
-                this.invoiceService.GetAllByCustomerId(userId).To<InvoicesMyViewModel>().ToList();
+                this.invoicesService.GetAllByCustomerId(userId).To<InvoicesMyViewModel>().ToList();
 
             return this.View(myInvoices);
 

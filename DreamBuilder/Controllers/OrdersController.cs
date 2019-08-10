@@ -15,9 +15,9 @@ namespace DreamBuilder.Controllers
     {
         private readonly IOrdersService ordersService;
         private readonly IProductsService productsService;
-        private readonly IInvoiceService invoiceService;
+        private readonly IInvoicesService invoiceService;
 
-        public OrdersController(IOrdersService ordersService, IProductsService productsService, IInvoiceService invoiceService)
+        public OrdersController(IOrdersService ordersService, IProductsService productsService, IInvoicesService invoiceService)
         {
             this.ordersService = ordersService;
             this.productsService = productsService;

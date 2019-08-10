@@ -23,10 +23,9 @@ namespace DreamBuilder.Models.Invoices.ViewModels
         {
             configuration
                 .CreateMap<Invoice, InvoicesMyViewModel>()
-                .ForMember(destination => destination.Price,
-                            opts => opts.MapFrom(origin => origin.Orders.Sum(order => order.Product.Price)))
-                .ForMember(destination => destination.Products,
-                            opts => opts.MapFrom(origin => origin.Orders.Sum(product => product.Quantity)));
+                .ForMember(destination => destination.Price,   //TODO FIx it
+                            opts => opts.MapFrom(origin => origin.Orders.Sum(order => order.Product.Price)));
+                
 
         }
     }

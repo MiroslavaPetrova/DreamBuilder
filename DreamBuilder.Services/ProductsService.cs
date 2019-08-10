@@ -29,7 +29,6 @@ namespace DreamBuilder.Services
             this.context.SaveChanges();
         }
 
-
         public IEnumerable<TViewModel> GetAllProducts<TViewModel>()
         {
             var allProducts = this.context
@@ -48,14 +47,6 @@ namespace DreamBuilder.Services
                 .SingleOrDefault();
 
             return productFromDb;
-
-            //TODO Need to map more than the ID so include categories
-
-            //var productId = this.context
-            //    .Products
-            //    .SingleOrDefault(product => product.Id == id);
-
-            //return productId;
         }
     }
 }
